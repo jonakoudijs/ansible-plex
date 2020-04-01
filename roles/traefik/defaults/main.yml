@@ -1,0 +1,20 @@
+---
+# defaults file for traefik
+
+traefik_domain: "plex.example.com"
+traefik_user: "traefik"
+traefik_group: "traefik"
+
+traefik_version: "2.2.0"
+traefik_download_url: "https://github.com/containous/traefik/releases/download/v{{ traefik_version }}/traefik_v{{ traefik_version }}_linux_amd64.tar.gz"
+traefik_download_tmp: "/tmp/traefik"
+
+traefik_binary: "{{ traefik_binary_dir }}/traefik"
+traefik_binary_dir: "/usr/local/bin"
+traefik_config: "{{ traefik_config_dir }}/traefik.yaml"
+traefik_config_dir: "/etc/traefik"
+traefik_acme_dir: "{{ traefik_config_dir }}/acme"
+
+
+traefik_log_file: "{{ traefik_log_dir }}/traefik.log"
+traefik_log_dir: "/var/log/traefik"

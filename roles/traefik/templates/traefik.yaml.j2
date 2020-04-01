@@ -1,0 +1,43 @@
+---
+# traefik configuration
+
+## frontend
+entryPoints:
+  http:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+          permanent: true
+
+  https:
+    address: ":443"
+    #http:
+    #  tls:
+    #    certResolver: leresolver
+    #    domains:
+    #      - main: {{ traefik_domain }}
+
+## backend
+http:
+  routers:
+    plex-server:
+      entryPoints:
+        - "https"
+      rule: "Host(`{{ traefik_domain }}`)"
+      tls:
+        certResolver: leresolver
+      service: "plex-server"
+
+  services:
+    plex-server:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:32400/web/"
+
+## logging
+accessLog: {}
+log:
+  filePath: "{{ traefik_log_file }}"

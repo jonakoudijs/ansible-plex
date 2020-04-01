@@ -1,0 +1,32 @@
+---
+# tasks file for plex-server
+
+- name: Configure Plex APT repository
+  apt_repository:
+    repo: "{{ plex_apt_repo_url }}"
+    state: present
+    update_cache: false
+  register: status_plex_apt_repo
+
+- name: Add Plex APT repository key
+  apt_key:
+    url: "{{ plex_apt_repo_key }}"
+    state: present
+  register: status_plex_apt_key
+
+- name: Update APT repository after change
+  apt:
+    update_cache: true
+  when: status_plex_apt_repo.changed
+     or status_plex_apt_key.changed
+
+- name: Install Plex Media Server
+  apt:
+    name: plexmediaserver
+    state: present
+
+- name: Start and enable Plex service
+  service:
+    name: plexmediaserver
+    state: started
+    enabled: true
