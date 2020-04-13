@@ -10,5 +10,5 @@
     - traefik
 
   vars:
-    traefik_api_insecure: true
-    traefik_api_dashboard: true
+    traefik_api_insecure: false
+    traefik_api_dashboard: false
