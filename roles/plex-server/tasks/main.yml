@@ -1,0 +1,10 @@
+---
+# tasks file for plex-server
+
+- name: Docker install
+  include_tasks: docker.yml
+  when: plex_docker
+
+- name: Manual install
+  include_tasks: manual.yml
+  when: not plex_docker
