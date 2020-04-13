@@ -9,8 +9,11 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "plex01"
 
   # network config
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 80, host: 8888
   config.vm.network "forwarded_port", guest: 443, host: 4443
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 8088, host: 8088
+  config.vm.network "forwarded_port", guest: 8089, host: 8089
   config.vm.network "forwarded_port", guest: 32400, host: 32400
 
   # vbox config

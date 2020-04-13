@@ -58,11 +58,25 @@
     group: "{{ traefik_group }}"
     state: directory
 
-- name: Configure Traefik configuration
+- name: Configure Traefik configurations
   template:
-    src: traefik.yaml.j2
-    dest: "{{ traefik_config }}"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: traefik.yaml.j2
+      dest: "{{ traefik_config }}"
+    - src: dynamic.yaml.j2
+      dest: "{{ traefik_config_dynamic }}"
   notify: restart traefik
+
+- name: Make sure acme.json file exists
+  file:
+    path: "{{ traefik_acme_file }}"
+    owner: "{{ traefik_user }}"
+    group: "{{ traefik_group }}"
+    mode: '0600'
+    state: touch
+  changed_when: false
 
 - name: Configure Traefik service
   template:

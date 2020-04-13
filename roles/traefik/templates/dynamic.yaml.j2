@@ -1,0 +1,35 @@
+---
+# traefik dynamic
+
+http:
+  routers:
+    ## plex
+    plex-server-router:
+      rule: "Host(`{{ traefik_domain_plex }}`)"
+      service: "plex-server-service"
+      priority: 1000
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt-resolver
+    ## synclounge
+    synclounge-router:
+      rule: "Host(`{{ traefik_domain_synclounge }}`)"
+      service: "synclounge-service"
+      priority: 1000
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt-resolver
+
+  services:
+    ## plex
+    plex-server-service:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:32400/web/"
+    ## synclounge
+    synclounge-service:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8088"

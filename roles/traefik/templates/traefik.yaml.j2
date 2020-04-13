@@ -1,9 +1,19 @@
 ---
 # traefik configuration
 
-## frontend
+## general
+accessLog: {}
+log:
+  level: {{ traefik_log_level }}
+  filePath: "{{ traefik_log_file }}"
+
+api:
+  insecure: {{ traefik_api_insecure }}
+  dashboard: {{ traefik_api_dashboard }}
+
+## static
 entryPoints:
-  http:
+  web:
     address: ":80"
     http:
       redirections:
@@ -12,32 +22,25 @@ entryPoints:
           scheme: https
           permanent: true
 
-  https:
+  websecure:
     address: ":443"
-    #http:
-    #  tls:
-    #    certResolver: leresolver
-    #    domains:
-    #      - main: {{ traefik_domain }}
-
-## backend
-http:
-  routers:
-    plex-server:
-      entryPoints:
-        - "https"
-      rule: "Host(`{{ traefik_domain }}`)"
+    http:
       tls:
-        certResolver: leresolver
-      service: "plex-server"
+        certResolver: letsencrypt-resolver
+        domains:
+          - main: {{ traefik_domain_plex }}
+          - main: {{ traefik_domain_synclounge }}
 
-  services:
-    plex-server:
-      loadBalancer:
-        servers:
-          - url: "http://127.0.0.1:32400/web/"
+## resolvers
+certificatesResolvers:
+  letsencrypt-resolver:
+    acme:
+      email: {{ traefik_acme_email }}
+      storage: {{ traefik_acme_file }}
+      httpChallenge:
+        entryPoint: web
 
-## logging
-accessLog: {}
-log:
-  filePath: "{{ traefik_log_file }}"
+## dynamic
+providers:
+  file:
+    filename: "/etc/traefik/dynamic.yaml"

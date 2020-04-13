@@ -1,0 +1,12 @@
+---
+# tasks file for plex-server / docker
+
+- name: Create and run Plex container
+  docker_container:
+    name: "{{ plex_docker_name }}"
+    image: "{{ plex_docker_image }}"
+    volumes: "{{ plex_docker_volumes }}"
+    ports:
+      - "32400:32400"
+    restart_policy: always
+    state: started

@@ -4,5 +4,11 @@
   become: true
 
   roles:
+    - docker
     - plex-server
+    - synclounge
     - traefik
+
+  vars:
+    traefik_api_insecure: true
+    traefik_api_dashboard: true

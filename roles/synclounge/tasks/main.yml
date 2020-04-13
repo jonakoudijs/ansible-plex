@@ -1,10 +1,10 @@
 ---
-# tasks file for plex-server
+# tasks file for synclounge
 
 - name: Docker install
   include_tasks: docker.yml
-  when: plex_docker
+  when: synclounge_docker
 
 - name: Manual install
   include_tasks: manual.yml
-  when: not plex_docker
+  when: not synclounge_docker
