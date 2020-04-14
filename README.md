@@ -24,6 +24,7 @@ The roles support two installation methods; Docker and Manual. By default the Do
 plex_docker: false
 synclounge_docker: false
 ```
+The manual installation will install all the software directly on the server (without containers). For SyncLounge this means it has to build SyncLounge via NPM which takes a long time (and sometimes times out).
 
 ## Development
 
