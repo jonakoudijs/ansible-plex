@@ -9,4 +9,5 @@
     ports:
       - "32400:32400"
     restart_policy: always
+    pull: "{{ plex_docker_pull }}"
     state: started
