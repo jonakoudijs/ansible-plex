@@ -1,0 +1,15 @@
+name: Galaxy Publish
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish-to-galaxy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Galaxy Publish
+        uses: robertdebock/galaxy-action@1.0.3
+        with:
+          galaxy_api_key: ${{ secrets.GALAXY_API_KEY }}
