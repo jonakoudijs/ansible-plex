@@ -1,0 +1,5 @@
+---
+# vars file for plex / centos
+
+plex_repo_url: "https://downloads.plex.tv/repo/rpm/$basearch/"
+plex_repo_key: "https://downloads.plex.tv/plex-keys/PlexSign.key"

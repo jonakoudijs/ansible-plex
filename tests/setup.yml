@@ -1,0 +1,6 @@
+---
+- name: Setup Plex
+  hosts: all
+  become: true
+  roles:
+    - role: "../../."

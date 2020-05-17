@@ -1,5 +1,0 @@
----
-# defaults file for docker
-
-docker_apt_repo_url: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-docker_apt_repo_key: "https://download.docker.com/linux/ubuntu/gpg"

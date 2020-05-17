@@ -1,38 +1,45 @@
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-jonakoudijs.plex-blueviolet.svg)](https://galaxy.ansible.com/jonakoudijs/ansible_plex)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-# Ansible Plex
+Plex Ansible Role
+=================
 
-Complete Plex installation with Ansible (includes SyncLounge and tls proxy).
+Install Plex on Linux
 
-## Variables
+Requirements
+------------
 
-In general all of the available variables that can be set, can be found in the defaults of the roles. The most important variables to change are the domains of Plex and/or SyncLounge. Traefik uses these domains to request tls certificates via Let's Encrypt:
+This role needs to be executed as root with `become: true`.
+
+Role Variables
+--------------
+
+The following variables are set in `defaults/main.yml` and can be overwritten:
 ```
-plex_domain: "plex.example.com"
-synclounge_domain: "plex-sync.example.com"
-```
-When Plex is setup via Docker (the default) then the (data) volume must be set as well. Use the Docker style syntax, for example:
-```
-plex_docker_volumes:
-  - "/home/plex/movies:/movies"
-```
-
-## Installation Method
-
-The roles support two installation methods; Docker and Manual. By default the Docker method is used because it's the recommended way, especially for SyncLounge. To use the manual installation method for Plex and/or SyncLounge you will have to disable the Docker installation:
-```
-plex_docker: false
-synclounge_docker: false
-```
-The manual installation will install all the software directly on the server (without containers). For SyncLounge this means it has to build SyncLounge via NPM which takes a long time (and sometimes times out).
-
-## Development
-
-To test it locally, [Vagrant](https://www.vagrantup.com/) can be used. A VM will be created locally and the `install.yml` playbook will be executed on it:
-```
-vagrant up
+plex_repo  # Use official Plex package repository
 ```
 
-## License
+Dependencies
+------------
+
+This role does not have any dependencies.
+
+Example Playbook
+----------------
+
+Installing Plex:
+```
+- hosts: servers
+  roles:
+     - plex
+```
+
+License
+-------
 
 [MIT license](LICENSE)
+
+Author Information
+------------------
+
+Originally created by [Jona Koudijs](https://www.jona.io).

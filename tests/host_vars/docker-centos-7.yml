@@ -1,0 +1,4 @@
+---
+# host_vars for docker-centos-7
+
+ansible_python_interpreter: "/usr/bin/python2"

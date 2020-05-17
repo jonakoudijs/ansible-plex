@@ -1,0 +1,30 @@
+---
+# tasks file for plex / centos
+
+- name: Configure Plex repository
+  yum_repository:
+    name: PlexRepo
+    baseurl: "{{ plex_repo_url }}"
+    description: Plex Server Repo
+    gpgcheck: true
+  register: status_plex_repo
+  when: plex_repo
+
+- name: Add Plex repository key
+  rpm_key:
+    key: "{{ plex_repo_key }}"
+    state: present
+  register: status_plex_repo
+  when: plex_repo
+
+- name: Install Plex Server
+  yum:
+    name: plexmediaserver
+    state: present
+    update_cache: "{{ status_plex_repo.changed }}"
+
+- name: Start and enable Plex service
+  service:
+    name: plexmediaserver
+    state: started
+    enabled: true

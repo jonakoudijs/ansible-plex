@@ -1,0 +1,13 @@
+---
+# tasks file for plex
+
+- name: OS specific vars
+  include_vars: "{{ ansible_distribution | lower }}.yml"
+
+- name: Ubuntu setup tasks
+  include_tasks: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: CentOS setup tasks
+  include_tasks: centos.yml
+  when: ansible_distribution == "CentOS"

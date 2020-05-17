@@ -1,7 +1,0 @@
----
-# handlers file for traefik
-
-- name: restart traefik
-  service:
-    name: traefik
-    state: restarted

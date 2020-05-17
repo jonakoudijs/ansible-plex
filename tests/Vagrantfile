@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# list of hosts
+hosts = [
+  { :name => "plex-ubuntu-18", :box => "ubuntu/bionic64" },
+  { :name => "plex-ubuntu-16", :box => "ubuntu/xenial64" },
+  { :name => "plex-centos-7",  :box => "centos/7" }
+]
+
+# configure Vagrant
+Vagrant.configure("2") do |config|
+
+  # loop through hosts
+  hosts.each do |host|
+    config.vm.define host[:name] do |instance|
+
+      # general config
+      instance.vm.box = host[:box]
+      instance.vm.hostname = host[:name]
+
+      # ansible config
+      instance.vm.provision "ansible" do |ansible|
+        ansible.playbook = "setup.yml"
+        ansible.compatibility_mode = "2.0"
+        ansible.verbose = false
+      end
+
+    end
+  end
+
+end
