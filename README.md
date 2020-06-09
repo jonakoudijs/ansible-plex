@@ -16,7 +16,7 @@ Role Variables
 
 The following variables are set in `defaults/main.yml` and can be overwritten:
 ```
-plex_repo  # Use official Plex package repository
+plex_repo  # (bool) Use official Plex package repository
 ```
 
 Dependencies
