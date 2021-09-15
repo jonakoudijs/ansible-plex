@@ -1,3 +1,4 @@
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jonakoudijs/ansible-plex/Galaxy%20Publish?logo=github)](https://github.com/jonakoudijs/ansible-plex/actions)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-jonakoudijs.plex-blueviolet.svg)](https://galaxy.ansible.com/jonakoudijs/ansible_plex)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -16,7 +17,7 @@ Role Variables
 
 The following variables are set in `defaults/main.yml` and can be overwritten:
 ```
-plex_repo  # Use official Plex package repository
+plex_repo  # (bool) Use official Plex package repository
 ```
 
 Dependencies
