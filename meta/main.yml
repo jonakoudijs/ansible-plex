@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: plex
   author: Jona Koudijs
   description: Install Plex on Linux
 
